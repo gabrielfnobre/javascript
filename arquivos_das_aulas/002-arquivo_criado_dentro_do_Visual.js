@@ -1,0 +1,1 @@
+console.log("\nEsse arquivo foi criado dentro do visual")

@@ -1,0 +1,6 @@
+//substring():
+//Essa é uma função que percorre uma string á partir de determinado número índice até determinado número índice:
+
+let objeto = 'batata';
+console.log("Do índice 1 em diante: " + objeto.substring(1)); //Vai mostrar somente os caracteres do índice 1 em diante...
+console.log("Mostra do índice 0 até o 2: " + objeto.substring(0, 3)); //Vai mostrar á partir do índice 0 sem mostrar o valor do índice 3...

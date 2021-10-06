@@ -1,0 +1,13 @@
+//LABELS:
+//Os labels ou "rótulos", são usados para quando desejamos criar um rótulo para uma determinada parte do código e referenciar essa parte por através do seu nome atribuído. É muito parecido com o uso de módulos e funções, por isso não é muito utilizado, pois os desenvolvedores preferem muito mais usar módulos e funções.
+// Vejamos alguns exemplos da sua utilização...
+
+//USO DE BREAK COM RÓTULO:
+const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+//A missão desses laços for é contar de 0,0 até 2,2 usando o array nums...
+externo: for (a in nums) { //Perceba que rotulamos uma parte do código para que o break afetasse o for externo e não o for ao qual ele foi definido...
+    for (b in nums) {
+        if (a == 2 && b == 3) break externo; //Perceba que usamos o rótulo logo após o break para ativá-lo...
+        console.log(`Par = ${a},${b}`);
+    }
+}
