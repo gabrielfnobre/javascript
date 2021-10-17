@@ -1,12 +1,51 @@
 //FUNCTIONS:
 //Podemos interpretar funções em Javascript como métodos(referência a POO), funções e módulos para o nosso sistema. No Javascript as funções tem uma relevância muito grande, por isso é essencial que você entenda bem como elas funcionam no Javascript.
 
+//MÉTODOS DE DECLARAR FUNÇÕES:
+//Existem várias formas de declararmos funções em Javascript, vamos abordar algumas delas:
+//function declaration: (forma convencional de declarar uma função)
+//A grande vantagem das function declarations é que elas são carregadas pelo interpretador do javascript assim que o programa é carregado no sistema, possibilitando que possamos chamá-las desde a linha 1 de um código fonte, o que não acontece com os demais tipos de declaração de funções.
+console.log("Uma Function Declaration foi criada:");
+console.log(functionDeclaration(3, 2)); //Veja que estamos chamando a função mesmo antes dela ter sido criada...
+function functionDeclaration (x, y) {
+    return x + y;
+}
+
+//function expression: (quando uma função anônima é declarada como valor de uma variável)
+const functionExpression = function (x, y) {
+    return x + y;
+}
+console.log("\nUma Function Expression foi criada:");
+console.log(functionExpression(4, 2));
+
+//named function expression: (quando uma função nomeada é declarada sobre uma variável)
+//Geralmente essa é uma forma pouquíssimo usada quando declaramos funções, pois ela não apresenta muitas vantagens. Porém, uma usabilidade para uma named expression é que elas são apresentadas no stack do console ao debugar, ficando mais fácil encontrar erros quando eles acontecem...
+const namedFunctionExpression = function funcaoNomeada(x, y) {
+    return x + y;
+}
+console.log("\nUma Named Function Expression foi declarada:");
+console.log(namedFunctionExpression(5, 2));
+
+
+
+//FUNÇÕES IIFE (IMMEDIATELY INVOKED FUNCTION EXPRESSION):
+//são funções invocadas automáticamente, assim que o código é carregado, elas que chamam a si mesmas. As IIFE sempre devem ser functions expressions, ou seja, funções anônimas.
+//A grande vantagem das IIFE é que elas fogem totalmente do escopo global, tudo o que acontece com elas fica dentro do module.exports da função e não pode ser afetado de forma alguma pelo escopo global - a menos que a própria IIFE faça uma chamada direta ao escopo global é claro.
+(function (valor, nome) { //A sintaxe de uma IIFE é muito simples, basta criar uma função anônima e envolvê-la por parênteses, e tudo o que estiver dentro dela será referenciado somente ao contexto da função...
+    console.log("Eu sou uma função auto-invocada!");
+    var numero = valor;
+    var nome = nome;
+    console.log(`\nO valor ${numero} por extenso se escreve ${nome}.`);
+})(4, 'quatro') //Para que a função invoque a si mesma, usamos o parênteses de invocação, assim com fazemos com as funções normais, podemos até passar parâmetros para eles...
+
+
+
 //FUNÇÃO QUE RECEBE PARÂMETROS PORÉM NÃO DÁ RETORNO:
 function imprimirSoma(a, b) { //Por ser fracamente tipada não precisamos de definir tipos primitivos para os parâmetros, outro detalhe é que no corpo de uma função são obrigatórios o uso das chaves (com excessão de arrow function)...
     console.log(a + b);
     //Mesmo quando uma função não tem o return declarado explicitamente nela, conceitualmente, ela possuí o return sim, porém o seu return está com o valor "undefined", caso chamássemos pelo retorno dela literalmente iríamos ver o resultado como undefined... 
 }
-console.log('Função recebe parâmetros mas não dá retorno...')
+console.log('\nFunção recebe parâmetros mas não dá retorno...')
 imprimirSoma(2, 3); //Perceba que passamos 2 argumentos para a função...
 console.log(imprimirSoma(2, 3)) //Porém perceba que junto ao valor, toda função tem retorno, se não colocamos o resultado no retorno, o retorno dela vêm como undefined...
 
@@ -259,6 +298,77 @@ outroObject(); //Porém quando chamamos a função ela executa e não consegue e
 const usandoBindNoutroObject = pessoa.falar.bind(pessoa); //Perceba que fizemos a mesma operação de cima, tentando capturar o valor do atributo "saudacao" por através da chave "falar" do objeto "pessoa", porém, dessa vez usamos o bind() para amarrar a chamada da função "falar" ao objeto "pessoa"...
 console.log("\nConseguindo pegar o valor do atributo de outro objeto que usa this referenciado a ele mesmo com a ajuda do bind():");
 usandoBindNoutroObject(); //Veja como o resultado é diferente quando usamos "bind()"...
+
+
+
+//FUNÇÕES FACTORY:
+//Como o próprio nome sugere, funções factory são funções que tem o objetivo de fabricar. Fabricar o que? Fabricar objetos á partir da função, como se fosse uma classe ou funções construtoras.
+//CRIANDO FUNÇÃO FACTORY SIMPLES:
+function factory(nome, preco, descricao) { //Perceba que a criação de função factory é muito simples, nós a criamos assim como criamos uma função normal...
+    return { //O que a identifica como uma factory é o retorno de um objeto...
+        nome, //Repare que em nenhum momente usamos o "this" para instanciar os objetos que serão criados com á partir da função factory...
+        preco,
+        desconto: 0.10, //Podemos também delimitar valores padrão, seja no objeto em si ou no campo de parâmetro...
+        prodDescricao: () => `Descrição do produto: ${descricao}` //Perceba que podemos até colocar funções como se fossem métodos dentro do nosso objeto que para que sejam retornados por através da chamada do "método"....
+    }
+}
+
+const notebook = factory('notebook', 2199.00, 'String qualquer que descreve o notebook'); //Aqui está o momento chave da criação de um objeto usando factory, veja que usamos só uma variável e atribuímos a ela a própria chamada do factory, passando os valores que desejamos armazenar...
+const ipad = factory('ipad', 1999.00, 'String qualquer que descreve o ipad')
+
+console.log("1) Objeto notebook criado com factory:")
+console.log(notebook); //Veja o objeto completo apenas chamando pela variável...
+console.log(notebook.prodDescricao()) //Podemos chamar uma função dentro do objeto como se fosse método...
+console.log(typeof notebook); //Veja que realmente se trata de um objeto, como se fosse uma classe...
+
+console.log("\n2) Objeto ipad criado com factory:")
+console.log(ipad);
+console.log(ipad.prodDescricao())
+console.log(typeof ipad);
+
+
+
+//COMPARANDO FACTORY COM CLASSES E FUNÇÕES CONTRUTORAS:
+//Perceba logo abaixo que criamos uma classe como é comum em Javascript...
+class Pessoa {
+
+    constructor(nome) { //Na criação de classes é necessário o uso de um constructor para demarcar os atributos da classe...
+        this.nome = nome; //E sempre usamos o this para referenciar a instância dáquela classe...
+    }
+
+    falar() {
+        return `Olá meu nome é ${this.nome}`; //Nossos métodos também devem conter o "this" para instanciar corretamente o objeto...
+    }
+
+}
+
+const joao = new Pessoa('João'); //instanciamos o joão á partir da classe a qual ele pertence...
+
+console.log("\n3) Pessoa instanciada á partir de uma Classe:");
+console.log(joao.falar());
+
+//Classe Construtora em Javascript:
+function PessoaConstrutora(nome) { //Criamos a mesma Classe, mas aqui como se fosse uma função construtora...
+    
+    this.nome = nome;//Também usamos "this" para instanciar ao objeto da classe...
+
+    this.saudar = () => `Olá meu nome é ${this.nome}`; //Usamos também o "this" no método público...
+}
+
+const patricio = new PessoaConstrutora('Patrício'); //Para gerar um objeto do método construtor tivemos que instânciá-lo por atravé da plavra reservada "new"...
+console.log("\n4) Pessoa instanciada á partir de uma Função Construtora:");
+console.log(patricio.saudar());
+
+//Função Factory identica da Classe e Função Construtora anterior:
+function PessoaFactory(nome) { //Perceba como a sintaxe de uma função factory é bem mais simples...
+    return {
+        apresentar: () => `Olá meu nome é ${nome}` //Lembre-se que ela não precisa de usar o this...
+    }
+}
+
+const roberto = PessoaFactory('Roberto');
+console.log("\n5) Pessoa instanciada á partir de uma Função Fábrica:");
+console.log(roberto.apresentar()); //Por não usar o this a chamada de um objeto pertencente a uma função factory é sempre detro do contexto do objeto, isso já é implícito, diferente das classes e funções construtoras, onde o this pode fazer com que o contexto da função varie...
 
 
 
