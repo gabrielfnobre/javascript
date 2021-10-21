@@ -95,3 +95,47 @@ console.log('\n7)', ferrari.status())
 
 volvo.aceleraMais(180)
 console.log('\n8)', volvo.status()) //Veja como o método status causou uma sobrescrita sobre o status do objeto pai "carro"
+
+
+
+//USANDO OBJECT.CREATE() PARA GERAR HERANÇA:
+//Outra forma de gerar herança é usando o método "create()" da função Object, da seguinte forma:
+const paiCreate = {nome: 'João', cabelo: 'Preto'} //Temos um objeto pai...
+const filhaCreate = Object.create(pai) //E criamos um novo objeto para filha, onde o Object.create recebe como parâmetro o nome do objeto que desejamos herdar...
+console.log('\n9)', filhaCreate.nome, filhaCreate.cabelo) //Veja que a herança já aconteceu, os atributos foram herdados, mas ele está em vazio por que o create() só permite que um objeto herde as chaves, ele não permite que valores sejam passados entre o elemento pai e o elemento filho...
+
+filhaCreate.nome = 'Ana' //Agora sim nós passamos valores para as chaves...
+filhaCreate.cabelo = 'Loiro'
+console.log('9)', filhaCreate.nome, filhaCreate.cabelo) //E eles vão receber normalmente os valores como podemos ver no console...
+
+
+
+//ATRIBUINDO VALORES DIRETAMENTE NO OBJECT.CREATE E AINDA MEXENDO NAS PROPRIEDADES:
+//É possível atribuir valores a um objeto filho assim que usamos o método create(), e ainda por cima, podemos alterar as propriedades de chave desse elemento...
+const filhaCreate2 = Object.create(pai, { //Veja que podemos atribuir valores as chaves herdadas abrindo um objeto dentro do campo de parâmetros do método create e colocando as chaves, seus valores, se podem ser sobrescritos e sua visibilidade...
+    nome: {value: 'Rafaela', writable: false, enumerable: true}
+})
+filhaCreate2.nome = 'Carla' //Perceba que, como colocamos que a chave nome não pode ser sobrescrita, não podemos fazer a mudança de nome...
+console.log('\n10)', filhaCreate2.nome, filhaCreate2.cabelo) //Perceba que os valores das chaves só ficam visíveis quando declaramos valores para elas...
+console.log('10)', Object.keys(filhaCreate2)) //Apesar de ter o atributo cabelo herdado, para o javascript é como se o objeto filhaCreate2 tivesse somente a chave "nome dentro dela..."
+
+
+
+//VERIFICANDO QUE CHAVES SÃO HERDADAS COM O MÉTODO HASOWNPROPERTY():
+//O método "hasOwnProperty()" é usado para verificar que valores realmente pertencem a um objeto e quais são herdados de um outro objeto, veja como podemos utilizá-lo:
+const paiHasOwn = {nome: 'Pedro', cabelo: 'Preto'} 
+const filhaHasOwn = Object.create(paiHasOwn, { //Veja que filhaHasOwn pegou o atributo nome e o sobrescreveu, fazendo com que a herança agora alterada a sua maneira
+    nome: {value: 'Patrícia', writable: false, enumerable: true}
+})
+filhaHasOwn.altura = 1.75 //E criamos uma chave nova para o elemento "altura"
+console.log('\n11)', filhaHasOwn.hasOwnProperty('nome')) //Perceba que todas as chaves alteradas ou criadas no próprio objetos retornam valor true
+console.log('11)', filhaHasOwn.hasOwnProperty('altura')) 
+console.log('11)', filhaHasOwn.hasOwnProperty('cabelo')) //Mas chaves que não foram criadas nem alteradas são retornam valor false...
+
+
+
+//USANDO HASOWNPROPERTY DE FORMA MAIS INTELIGENTE:
+console.log('\n12)')
+for (let i in filhaHasOwn) { //Usando um laço for podemos iterar mais facilmente... 
+    filhaHasOwn.hasOwnProperty(i) ? console.log(`Pertence a mim ${i}`) : console.log(`Não pertence a mim ${i}`)
+}
