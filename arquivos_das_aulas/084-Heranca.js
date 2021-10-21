@@ -8,7 +8,7 @@
 //Mas cuidado para não confundir, a propriedade [[prototype]] utilizada nas heranças de objetos é totalmente diferente da propriedade "prototype" que existe nas funções, uma coisa não tem a ver com a outra.
 //OBS: Quando o assunto é Javascript, é sempre melhor priorizar o uso de composição no lugar de herança.
 
-//ATRIBUTO PROTOTYPE DE OBJETC ESTÁ PRESENTE EM QUALQUER OBJETO:
+//ATRIBUTO PROTOTYPE DE OBJECT ESTÁ PRESENTE EM QUALQUER OBJETO:
 const teste = {atributo: 'oi'} //Perceba que temos um objeto comum
 console.log('\n1)', teste.__proto__ === Object.prototype) //Ao fazer a comparação entre o seu prototype e o de Object temos o mesmo prototype...
 
@@ -16,12 +16,6 @@ console.log('\n1)', teste.__proto__ === Object.prototype) //Ao fazer a comparaç
 
 //OBJECT NÃO POSSUÍ UM PROTOTYPE SUPERIOR A ELE:
 console.log('\n2)', Object.prototype.__proto__) //Veja que o resultado é null, pois Object não possuí um prototype superior...
-
-
-
-//UMA FUNCTION GERA UM PROTOTYPE PRÓPRIO DELA:
-const funcao = () => {} //Perceba que o prototype de uma função é diferente do prototype do Object...
-console.log('\n3)', funcao.prototype === Object.prototype)
 
 
 
@@ -33,13 +27,13 @@ const filho = {__proto__: pai, attr3: 'C'} //Fizemos o mesmo em filho, onde filh
 
 
 //VENDO HERANÇA ACONTECER DE ELEMENTO FILHO PARA ANCESTRAL:
-console.log('\n4)', filho.attr1) //Perceba que existe uma herança onde filho procura pelo atributo attr1, ao não encontrar procura no protótipo dele que é pai, ao nao encontrar procura no protótipo de pai que é "avô", por ter encontrado no avô ele retorna a busca com o resultado do valor do atributo...
+console.log('\n3)', filho.attr1) //Perceba que existe uma herança onde filho procura pelo atributo attr1, ao não encontrar procura no protótipo dele que é pai, ao nao encontrar procura no protótipo de pai que é "avô", por ter encontrado no avô ele retorna a busca com o resultado do valor do atributo...
 
 
 
 //VENDO QUE SE UM OBJETO HERDEIRO NÃO ENCONTRAR UM ELEMENTO NO ÚLTIMO ANCESTRAL ELE PROCURA NO OBJECT
 Object.prototype.attr0 = 'Z' //Veja que atribuímos um atributo diretamente sobre o Object, com o valor 'Z'
-console.log('\n5)', filho.attr0) //Por não encontrar o atributo nem em pai e nem em avo, ele procura no Object...
+console.log('\n4)', filho.attr0) //Por não encontrar o atributo nem em pai e nem em avo, ele procura no Object...
 
 
 
@@ -48,7 +42,7 @@ console.log('\n5)', filho.attr0) //Por não encontrar o atributo nem em pai e ne
 const rei = {cabelo: 'preto', olhos: 'castanhos'}
 const principe = {__proto__: rei, cabelo: 'loiro'} //Perceba que o príncipe herda os atributos do rei, mas o cabelo dele sobrescreve o atributo cabelo para "loiro", isso que acabou de acontecer é o shadowing...
 const futuroPrincipe = {__proto__: principe}
-console.log('\n6)', futuroPrincipe.cabelo, futuroPrincipe.olhos) //Quando puxamos os atributos do futuroPrincipe, ele herda o cabelo loiro do pai por causa do shadowing, mas os olhos ele herda do seu avo...
+console.log('\n5)', futuroPrincipe.cabelo, futuroPrincipe.olhos) //Quando puxamos os atributos do futuroPrincipe, ele herda o cabelo loiro do pai por causa do shadowing, mas os olhos ele herda do seu avo...
 
 
 
@@ -91,10 +85,10 @@ Object.setPrototypeOf(volvo, carro)
 
 //Veja como a herança ocorreu corretamente entre os objetos e o objeto pai "carro"
 ferrari.aceleraMais(300)
-console.log('\n7)', ferrari.status())
+console.log('\n6)', ferrari.status())
 
 volvo.aceleraMais(180)
-console.log('\n8)', volvo.status()) //Veja como o método status causou uma sobrescrita sobre o status do objeto pai "carro"
+console.log('\n7)', volvo.status()) //Veja como o método status causou uma sobrescrita sobre o status do objeto pai "carro"
 
 
 
@@ -102,11 +96,11 @@ console.log('\n8)', volvo.status()) //Veja como o método status causou uma sobr
 //Outra forma de gerar herança é usando o método "create()" da função Object, da seguinte forma:
 const paiCreate = {nome: 'João', cabelo: 'Preto'} //Temos um objeto pai...
 const filhaCreate = Object.create(pai) //E criamos um novo objeto para filha, onde o Object.create recebe como parâmetro o nome do objeto que desejamos herdar...
-console.log('\n9)', filhaCreate.nome, filhaCreate.cabelo) //Veja que a herança já aconteceu, os atributos foram herdados, mas ele está em vazio por que o create() só permite que um objeto herde as chaves, ele não permite que valores sejam passados entre o elemento pai e o elemento filho...
+console.log('\n8)', filhaCreate.nome, filhaCreate.cabelo) //Veja que a herança já aconteceu, os atributos foram herdados, mas ele está em vazio por que o create() só permite que um objeto herde as chaves, ele não permite que valores sejam passados entre o elemento pai e o elemento filho...
 
 filhaCreate.nome = 'Ana' //Agora sim nós passamos valores para as chaves...
 filhaCreate.cabelo = 'Loiro'
-console.log('9)', filhaCreate.nome, filhaCreate.cabelo) //E eles vão receber normalmente os valores como podemos ver no console...
+console.log('8)', filhaCreate.nome, filhaCreate.cabelo) //E eles vão receber normalmente os valores como podemos ver no console...
 
 
 
@@ -116,8 +110,8 @@ const filhaCreate2 = Object.create(pai, { //Veja que podemos atribuir valores as
     nome: {value: 'Rafaela', writable: false, enumerable: true}
 })
 filhaCreate2.nome = 'Carla' //Perceba que, como colocamos que a chave nome não pode ser sobrescrita, não podemos fazer a mudança de nome...
-console.log('\n10)', filhaCreate2.nome, filhaCreate2.cabelo) //Perceba que os valores das chaves só ficam visíveis quando declaramos valores para elas...
-console.log('10)', Object.keys(filhaCreate2)) //Apesar de ter o atributo cabelo herdado, para o javascript é como se o objeto filhaCreate2 tivesse somente a chave "nome dentro dela..."
+console.log('\n9)', filhaCreate2.nome, filhaCreate2.cabelo) //Perceba que os valores das chaves só ficam visíveis quando declaramos valores para elas...
+console.log('9)', Object.keys(filhaCreate2)) //Apesar de ter o atributo cabelo herdado, para o javascript é como se o objeto filhaCreate2 tivesse somente a chave "nome dentro dela..."
 
 
 
@@ -128,14 +122,44 @@ const filhaHasOwn = Object.create(paiHasOwn, { //Veja que filhaHasOwn pegou o at
     nome: {value: 'Patrícia', writable: false, enumerable: true}
 })
 filhaHasOwn.altura = 1.75 //E criamos uma chave nova para o elemento "altura"
-console.log('\n11)', filhaHasOwn.hasOwnProperty('nome')) //Perceba que todas as chaves alteradas ou criadas no próprio objetos retornam valor true
-console.log('11)', filhaHasOwn.hasOwnProperty('altura')) 
-console.log('11)', filhaHasOwn.hasOwnProperty('cabelo')) //Mas chaves que não foram criadas nem alteradas são retornam valor false...
+console.log('\n10)', filhaHasOwn.hasOwnProperty('nome')) //Perceba que todas as chaves alteradas ou criadas no próprio objetos retornam valor true
+console.log('10)', filhaHasOwn.hasOwnProperty('altura')) 
+console.log('10)', filhaHasOwn.hasOwnProperty('cabelo')) //Mas chaves que não foram criadas nem alteradas são retornam valor false...
 
 
 
 //USANDO HASOWNPROPERTY DE FORMA MAIS INTELIGENTE:
-console.log('\n12)')
+console.log('\n11)')
 for (let i in filhaHasOwn) { //Usando um laço for podemos iterar mais facilmente... 
     filhaHasOwn.hasOwnProperty(i) ? console.log(`Pertence a mim ${i}`) : console.log(`Não pertence a mim ${i}`)
 }
+
+
+
+//PROTOTYPE EM FUNÇÕES:
+//As funções possuem um prototype próprio delas, mas elas também possuem um prototype que referencia a função Object afinal, as funções em Javascript também são tratadas como objetos. Mas as formas de referenciá-las são diferentes.
+//Quando usamos "prototype" diretamente sobre uma função, nós referenciamos ao prototype do elemento Function do Javascript, mas quando referenciamos ao [[prototype]] da função, por através do __proto__ nós referenciamos a função Object. 
+function MeuObjeto() {} //Criamos aqui uma função, toda função têm um prototype interno...
+console.log('\n12)', MeuObjeto.prototype === Object.prototype) //Mas o prototype de uma função é somente dela, não pode ser referenciado pelo prototype da função Object...
+
+const objFuncaoProto1 = new MeuObjeto //Quando instanciamos um objeto sobre uma função, mesmo que ela são seja construtora de fato, como é o exemplo da função acima, ela irá se comportar como construtora e ela irá referenciar ao prototype da função, isso faz com que objetos possam herdar atributos de suas classes por assim dizer...
+console.log('12)', MeuObjeto.prototype === objFuncaoProto1.__proto__)
+
+
+
+//PROTOTYPE DAS FUNÇÕES É DIFERENTE DOS PROTOTYPES DOS OBJECTS:
+console.log('\n13)', MeuObjeto.__proto__ === Function.prototype) //Perceba que o __proto__ de uma função construtora não referencia ao prototype da função Object, afinal uma função é criada á partir do tipo Function, referenciado a função Function...
+
+console.log('13)', Function.prototype.__proto__ === Object.prototype) //Porém, o objeto Function tem como prototype de referência a função Object, o que quer dizer que dentro do javascript toda função é um objeto...
+
+
+
+//GERANDO NOVAS PROPRIEDADES PARA A MINHA FUNÇÃO CONSTRUTORA:
+//É possível criar mais propriedades para uma função construtora, mas temos que fazer isso acessando o prototype da função...
+MeuObjeto.prototype.nome = "Anônimo" //Veja que após ter criado a função "MeuObjeto" adicionamos um atributo "nome" usando o prototype...
+MeuObjeto.prototype.falar = function () { //E também adicionamos uma função falar() que fala o nome da pessoa. ATENÇÃO!!! ARROW FUNCTIONS NÃO FUNCIONAM BEM DENTRO DE FUNÇÕES CONSTRUTORAS QUANDO UTILIZAMOS THIS, POIS O THIS DE UMA ARROW FUNCTION SEMPRE VAI REFERENCIAR AO CONTEXTO DE ONDE A FUNÇÃO É CRIADA...
+    console.log(`Meu nome é ${this.nome}`)
+}
+
+console.log('\n14:')
+objFuncaoProto1.falar() //Veja que assim que adicionamos novos atributos, eles já estão disponíveis para que as instâncias possam utilizá-los...  
