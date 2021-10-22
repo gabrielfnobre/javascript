@@ -1,6 +1,7 @@
 //FREEZE():
 //O freeze() é uma função built-in do javascript que é utilizada para impedir que um objeto constante possa ter os valores de suas chaves - ou as próprias chaves - alteradas de alguma forma.
 //Ele congela o elemento de tal forma que se torna impossível modificar seu conteúdo, nem mesmo sendo possível deletá-lo por através do comando "delete".
+//OBS: o freeze() funciona somente com objetos, não importa se eles estão dentro de uma constante ou não.
 //Veja como podemos utilizá-lo...
 
 //POR QUE CONSEGUIMOS MUDAR OS VALORES DE OBJETOS MESMO ELES ESTANDO ARMAZENADOS EM CONSTANTES:
