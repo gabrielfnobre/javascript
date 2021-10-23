@@ -34,6 +34,7 @@ class CicloFinanceiro { //Perceba que por convenção, quando temos um nome comp
         this.lancamentos.forEach(l => {
             valorConsolidado += l.valor //Lembre-se que valor é um atributo criado á partir da Classe Lancamentos...
         })
+        console.log('1)')
         this.lancamentos.forEach(l => {
             console.log(`${l.nome}: R$ ${l.valor}`)
         })
@@ -56,3 +57,32 @@ contasMesOut.addLancamentos(salario, contaDeAgua, contaDeLuz, contaDeTelefone)
 
 //Acionamos o sumario para mostrar tudo oque foi ganho e gasto e o resultado final...
 contasMesOut.sumario()
+
+
+
+//GERANDO HERANÇA NAS CLASSES NO NOVO ECMA SCRIPT 2015:
+//No ECMA Script 2015 junto ao elemento Class, também foi adicionado o elemento "extends", que assim como em outras linguagens de programação, tem o objetivo de fazer com que um super classe extenda os seus atributos e métodos para uma subclasse, vamos ver como usá-lo:
+class Avo { //Temos uma super classe gerada de forma comum...
+    constructor(sobrenome){
+        this.sobrenome = sobrenome
+    }
+}
+
+class Pai extends Avo { //Mas perceba que quando temos uma herança usamos o "extends" na sub-classe seguido pelo nome da Super Classe que desejamos que ela herde...
+    constructor(sobrenome, profissao = 'professor'){
+        super(sobrenome) //Perceba que, quando referenciamos aos atributos ou métodos de uma Super Classe sempre usamos a palavra reservada "super()" no lugar da palavra "this"... 
+        this.profissao = profissao //Usamos "this" somente quando desejamos referenciar a um atributo ou método criado na própria classe...
+    }
+}
+
+class Filho extends Pai {
+    constructor(){ //Perceba que no Filho não desejamos inventar nada novo, então, não houve necessidade de adicionar um novo atributo...
+        super('Silva') //Aqui nós atribuímos um sobrenome ao filho, fazendo referência a super classe pai, que por sua vez fará referência a super classe Avo...
+    }
+}
+
+const filho = new Filho
+const pai = new Pai
+const avo = new Avo
+
+console.log('\n2)', filho, pai, avo) //Perceba que, por filho ter o valor silva atribuído sobre si, pai não recebe o valor de sobrenome, o valor deveria ter sido atribuído sobre o pai ou sobre o avô para que ele recebesse o sobrenome "Silva"...
