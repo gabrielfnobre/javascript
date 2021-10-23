@@ -1,0 +1,6 @@
+//PARSE():
+//O método "parse()" do JSON faz com que um arquivo JSON seja convertido para um objeto comum no Javascritp...
+
+//TRANSFORMANDO OBJETO JSON EM UM OBJETO EM JAVASCRIPT:
+//Podemos usar o método "parse()" do tipo JSON em Javascript para transformar um arquivo JSON em um Objeto novamente...
+console.log('\n1)', JSON.parse('{ "a":"Oi", "b":"tudo", "c":"bem?"}'))
