@@ -34,4 +34,3 @@ Array.prototype.flatMap = function(callback) { //Criamos uma função interna o 
 }
 
 console.log('Correto:', escola.flatMap(getTurma))
-

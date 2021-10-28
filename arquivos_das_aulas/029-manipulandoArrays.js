@@ -61,3 +61,16 @@ console.log('\n12)', typeof Array)
 const arrayInstance = new Array(1, 2, 3, 4) //Acabamos de criar um array por instancialização e ainda por cima declaramos elementos literalmente. Embora essa seja uma forma de criar array, essa é uma forma não recomendada, o mais recomendado é o tipo de criação literal de array...
 console.log('\n13)', arrayInstance)
 console.log('\n14)', typeof arrayInstance) //Apesar de ser um array, ele não passa de um object, pois foi criado por instancializaçao...
+
+
+
+//INDEXANDO ARRAY PELA NUMERAÇÃO Á PARTIR DO 1 EM VEZ DO 0:
+const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro']
+
+numero1 = 4 //Veja que os números estão atribuídos a uma variável...
+numero2 = 5
+numero3 = 6
+
+console.log('\n15)', meses[--numero1]) //Em seguida usamos o operador de decremento pré-fixado, ele faz com que o elemento passado seja decrementado antes de ser operado, isso faz parecer que estamos usando o número original dos meses...
+console.log(meses[--numero2])
+console.log(meses[--numero3])
