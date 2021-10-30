@@ -1,10 +1,11 @@
-const ObjetoParaArray = objeto => {
-    let newArray = []
-    newArray.concat([[Object.keys(objeto), objeto.value)
-    return console.log(newArray)
-}
+const objetoParaArray = objeto => console.log(Object.entries(objeto))
 
-ObjetoParaArray({
+objetoParaArray({
     nome: 'Maria',
     profissao: 'Desenvolvedora de software'
+})
+
+objetoParaArray({
+    codigo: 11111, 
+    preco: 12000
 })
