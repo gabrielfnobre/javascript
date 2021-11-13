@@ -1,0 +1,19 @@
+{
+  "name": "135-funcionarios",
+  "version": "1.0.0",
+  "description": "Aqui segue uma descrição ficticia para o projeto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "palavraTal",
+    "palavraTal",
+    "palavraTal"
+  ],
+  "author": "Gabriel F. Nobre",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0"
+  }
+}
