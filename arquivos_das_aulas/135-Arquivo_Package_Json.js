@@ -15,7 +15,7 @@
 
 
 //CRIANDO ARQUIVO PACKAGE.JSON DETALHADAMENTE:
-//Podemos gerar um package.json colocando detalhadamente tudo o que queremos no arquivo, nesse método o Node para a execução da criação do arquivo em partes específicas para nos perguntar coisas como nome do arquivo, versão, descrição, arquivo de entrada do projeto, teste de comando, repositório no git, palavras chave para chamar pelo arquivo, autor e licensa.
+//Podemos gerar um package.json colocando detalhadamente tudo o que queremos no arquivo, nesse método o Node pára a execução da criação do arquivo em partes específicas para nos perguntar coisas como nome do arquivo, versão, descrição, arquivo de entrada do projeto, teste de comando, repositório no git, palavras chave para chamar pelo arquivo, autor e licensa.
 //Para gerarmos uma criação de package.json detalhada usamos o comando:
 //      npm init
 
@@ -27,7 +27,15 @@
 //OBS: Sempre certifique-se de que o arquivo package.json já existe dentro do seu projeto, e certifique-se de que o path esteja encaminhado para a biblioteca correta.
 //Podemos incluir uma biblioteca assim:
 //      npm i --save bibliotecaTal
-//  Depois de fazer o download da biblioteca, perceba que a biblioteca foi inclusa em denpendences no arquivo "package.json"
+//  Depois de fazer o download da biblioteca, perceba que a biblioteca foi inclusa em "dependences" no arquivo "package.json"
+
+
+
+
+//BAIXANDO DEPENDÊNCIAS DO PACKAGE JSON EM UM NOVO ARQUIVO:
+//Para que as dependências que salvamos no arquivo JSON sejam baixadas em num novo arquivo, basta para isso copiarmos ou baixarmos o nosso arquivo JSON á partir de um repositório dentro da nossa pasta de trabalho atual. E no terminal do Node usamos o comando:
+//              npm i
+//      Que significa "npm install", o Node irá procurar pelo arquivo "package.json" e irá automáticamente criar uma pasta "node-modules" contendo todas as bibliotecas que precisam ser baixadas no nosso projeto.  
 
 
 
@@ -59,5 +67,20 @@
 //Quando desejamos que um projeto pegue somente uma versão exata, que ela não aceite versões atualizadas de forma alguma, basta não colocarmos símbolo nenhum, da seguinte forma: "0.22.0". Melhor ainda, podemos atribuir isso no momento que baixamos a API, por através da flag "-E", essa flag significa que deverá pegar uma versão exata que também precisa ser passada no comando, dessa forma:
 //      npm i --save bibliotecaTal@.17.1 -E
 //  Note que incluímos ao nome da biblioteca o "@" seguido pelo número de versão da biblioteca, obrigatóriamente temos que informar qual é o número de versão, e ao final a flag "-E" (Sempre em maíusculo) pois ela que vai dizer que o arquivo deve ser o Exato! 
+
+
+
+//GERANDO SCRIPTS PARA SEREM EXECUTADOS NO TERMINAL DO NODE Á PARTIR DO PACKAGE.JSON:
+//É possível criar scripts que poderão ser executados no terminal do Node á partir do nosso arquivo package.json, existe um atributo dentro do nosso arquivo package JSON que se chama "scripts", dentro desse atributo temos um objeto onde podemos criar novos atributos contendo scripts em JSON que poderão ser executados no terminal do Node.
+
+//Mas existe uma regra a ser seguida quanto a nomeação desses atributos, pois o Node já trabalha com alguns nomes padrão para atributos de script, esses nomes padrão podem ser executados diretamente no node por através do comando:
+//              npm nomeDoAtributoDeScript
+//      Para saber que scripts já estão pré-definidos pelo Node acesse: https://docs.npmjs.com/cli/v8/using-npm/scripts
+
+//Ou podemos criar os nossos próprios nomes de atributos para que eles possam ser executados no Node, porém deles deverão ser executados de forma diferente por através do comando:
+//              npm run nomeDoAtributoDeScript
+//      Sempre usando a flag "run"...
+
+
 
 //Para ver um exemplo prático disso entre na aula "135-Ex-JSON" na pasta "Exercicios/135-Funcionarios"
