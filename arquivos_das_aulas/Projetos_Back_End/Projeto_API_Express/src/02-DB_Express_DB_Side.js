@@ -28,10 +28,18 @@ function getProdutos() {
     return Object.values(produtos)
 }
 
+//Essa função deleta um valor específico, de um DB...
+function excluirProdutos(id) {
+    const produto = produtos[id]
+    delete produtos[id]
+    return produto
+}
+
 //Como o nosso Banco será um Módulo do Node, usamos o module.exports para tornar as funções visíveis para o nosso arquivo servidor...
 //Perceba que somente as funções estão visíveis, pois será por através delas que iremos visualizar o que temos no banco, e adicionar produtos...
 module.exports = {
     salvarProduto,
     getProduto,
-    getProdutos
+    getProdutos,
+    excluirProdutos
 }
