@@ -56,9 +56,9 @@ app.put('/salvarProdutoPut/:id', (request, response, next) => { //Perceba que ag
 
 
 //Abaixo temos uma função que pode ser usada para deletar valores que correspondem a um id específico
-app.delete('/excluirProdutoDelete/:id', (request, response, next) => { //Perceba que agora ela recebe um número id, para que possa modificar um produto á sua maneira
-    const produto = db.excluirProdutos(request.params.id)
-    response.send(produto) //Ao final, nossa função retornará para nós o produto que foi adicionado ao Banco de Dados...
+app.delete('/excluirProdutoDelete/:id', (request, response, next) => { //Perceba que agora ela recebe um número id, para que possa deletar um determinado produto, e que, invés de post, ela utiliza o comando http "delete"
+    const produto = db.excluirProdutos(request.params.id) //Para referenciar ao objeto correto que desejamos deletar usamos o params mais uma vez...
+    response.send(produto) //Ao final, nossa função retornará qual foi o objeto deletado do Banco de Dados...
 })
 
 
