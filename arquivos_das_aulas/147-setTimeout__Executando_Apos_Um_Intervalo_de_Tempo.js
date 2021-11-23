@@ -1,4 +1,4 @@
-//SETTIMEOUT:
+//SETTIMEOUT
 
 //O método setTimeout() é um método interno do Javascript onde executamos uma função somente depois de esgotar uma quantidade de tempo passada para o método, essa quantidade de tempo tem que ser passada em milissegundos.
 //A grande diferença entre os métodos setTimeout() e setInterval() é que setInterval() fica executando a mesma função callback repetidas vezes dentro de um determinado espaço de tempo, enquanto setTimeout() executa a função somente uma vez depois de um determinado intervalo de tempo.
