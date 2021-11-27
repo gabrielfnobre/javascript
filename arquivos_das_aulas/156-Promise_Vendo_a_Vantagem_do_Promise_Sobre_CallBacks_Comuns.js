@@ -9,6 +9,7 @@
 
 //Queremos gerar uma função que retorne somente os nomes dos alunos de cada turma em um único array...
 
+//EXEMPLO COM CALLBACKS (Callback Hell>:C):
 //Primeiro temos que importar uma biblioteca para conexão com o arquivo por através de protocolo "http"...
 const http = require('http') //Estamos usando o módulo interno "http" do node invez de usar o "axios" por que o axios já é baseado em promise, então não faria sentido fazer um exercício com promise numa biblioteca que já utiliza "promise", por isso estamos usando a biblioteca "http" que é mais genérica.
 
@@ -39,3 +40,37 @@ getTurma('A', alunos => { //Perceba que chamamos a função "getTurma" primeiram
         })
     })
 })
+
+
+
+
+//REFATORANDO A FUNÇÃO ACIMA USANDO PROMISE USANDO PROMISE:
+const getTurmaPromise = letra => { //Perceba que agora, a função recebe somente 1 parâmetro que é a letra correspondente a turma...
+    const url = `http://files.cod3r.com.br/curso-js/turma${letra}.json` //Aqui juntamos a letra com a URL...
+    return new Promise((resolve, reject) => { //Perceba que agora estamos gerando um promise no retorno da função...
+        http.get(url, res => {
+            let resultado = '' //Temos uma variável que vai receber os dados...
+    
+            res.on('data', dados => { //a variável vai receber os dados JSON dentro de um array com os dados da URL graças ao "on('data')""
+                resultado += dados
+            })
+    
+            res.on('end', () => { //o evento "end" só ativado quando o evento anterior termina, depois que resultado colhe todos os dados, ele é ativado
+                try { //Mas nessa vez estamos usando um try e catch no evento "end", onde, caso o evento dê certo ele transforma os dados em JSON, caso dê errado ele retorna a mensagem de erro por através de catch...
+                    resolve(JSON.parse(resultado))
+                } catch(e){
+                    reject(e)
+                }
+            })
+        })
+    })
+    
+}
+
+Promise.all([getTurmaPromise('A'), getTurmaPromise('B'), getTurmaPromise('C')]) //Usando o objeto "promise" temos o método "all()", esse método recebe um array de funções para serem executadas, ele vai executar todas as funções e só quando terminar as execuções ele vai dar seguimento ao código... 
+    .then(turmas => [].concat(...turmas)) //Perceba que o then() pega todos os resultados das execuções e os concatena num array...
+    .then(alunos => alunos.map(alunos => alunos.nome)) //O array com os resultados é mapeado e são recolhidos só os nomes em um novo array...
+    .then(nomes => console.log('\nRESULTADO COM PROMISSE: VEJA QUE É IGUAL AO RESULTADO DA CALLBACK HELL, E É ATÉ EXECUTADA ANTES POR SER MAIS LEVE...', nomes)) //Finalmente o array somente com os nomes é devolvido...
+
+//Veja o resultado se der erro...
+getTurmaPromise('D').catch(e => console.log('\nERRO!!!: ', e.message)) //Usamos a letra para um turma que não existe...
