@@ -1,10 +1,10 @@
 //PROMISE:
 
-//As promises são um tipo de função do Javascript que utilizamos para basear as nossas requisições de um conteúdo por através de URL na rede. Por que são chamadas de promises? Por que esse é justamente o conceito de uma requisição URL, quando fazemos uma requisição, temos a promessa de que o recurso estará realmente disponível ou não infelizmente ele não estará, gerando um erro na nossa aplicação.
+//As promises são um tipo de função do Javascript que utilizamos para basear as nossas requisições de um conteúdo por através de URL na rede. Por que são chamadas de promises? Por que esse é justamente o conceito de uma requisição URL, quando fazemos uma requisição, temos a promessa de que o recurso estará realmente disponível ou se infelizmente ele não estará, gerando um erro na nossa aplicação.
 
 //As promises foram criadas justamente para lidar com essas requisições, onde podemos adicionar um tratamento ao conteúdo informático caso a promessa seja resolvida, ou poderemos dar um tratamento de erro caso a promessa seja rejeitada. Trabalhando nesses 2 conceitos, a promisse possuí 2 métodos, um para resolução e outro para rejeição:
 //      * .then() - usado quando uma promise recebeu o dado informático;
-//      * .catch() - usado quando ocorreu algum tipo e a promise não conseguiu o conteúdo informático;
+//      * .catch() - usado quando ocorreu algum tipo de erro e a promise não conseguiu o conteúdo informático;
 
 //Tanto ".then()" quanto ".catch()" recebem callbacks que irão realizar um tratamento sobre os dados de acordo com as suas respectivas funcionalidades, o que significa que, "then()" só vai receber dados quando o promise tiver dado certo, e "catch()" só vai receber dados quando o promise tiver dado errado. Como then() e catch() sabem que os dados deram errado ou deram certo? Isso acontece por que promise recebe 2 parâmetros:
 /*      promise(resolve, reject)
