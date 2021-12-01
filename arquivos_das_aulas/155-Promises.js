@@ -115,3 +115,23 @@ Promise.all([getTurmaPromise('A'), getTurmaPromise('B'), getTurmaPromise('C')]) 
 
 //Veja o resultado se der erro...
 getTurmaPromise('D').catch(e => console.log('\nERRO!!!: ', e.message)) //Usamos a letra para um turma que não existe...
+
+
+
+
+//SE UM ERRO ACONTECER NO THEN() O CATCH() É ACIONADO:
+//Veja que temos uma função que gera um número randômico de 0 a 0.9, caso o número passado como parâmetro para a função seja menor que 0.9 a função irá executar um error...
+function numbersRandom(value, number) {
+    return new Promise((resolve, reject) => {
+        if(number < Math.random()){
+            reject('Ocorreu um erro')
+        } else {
+            resolve(value)
+        }
+    })
+}
+
+numbersRandom('Testando...', 1) //Passamos como parâmetro o número 1, isso significa que a função nunca executará um erro...
+    .then(v => consol.log(v)) //Perceba que o erro acontece dentro do then(), chamamos um "consol" em vez de "console"
+    .catch(err => console.log('\nO erro foi', err)) //Veja que o erro é acionado...
+    .then( _ => console.log('Eu ainda aconteço por que eu sou um then()...')) //Veja também a importância de sempre colocar o cacth() no final de uma execução de promise, afinal, qualquer execução then que existir depois de um "catch" será executada...
