@@ -1,0 +1,27 @@
+<!-- getElementById -->
+
+<!-- O getElementById() é um método do elemento document onde podemos capturar um elemento html pelo seu id e operar sobre ele.Vejamos um exemplo...-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo getElementById</title>       
+</head>
+<body>
+    <!-- Abaixo temos o exemplo de um texto que muda de cor toda vez que clicamos num determinado botão para mudar a sua cor. Toda essa interação ocorre por através do "id"... -->
+    <p id="para1">Algum texto de exemplo</p> <!--Aqui temos o id "param1"-->
+    <button onclick="mudarCor('blue');">Azul</button> <!--Usando o evento de click mudamos a cor do elemento...-->
+    <button onclick="mudarCor('red');">Vermelho</button>
+    
+    <!-- Abaixo temos uma função que recebe o nome da cor e atribuí ao elemento por através do seu "id"... -->
+    <script>
+        function mudarCor(novaCor) {
+          var elemento = document.getElementById("para1");
+          elemento.style.color = novaCor;
+        }
+    </script>
+</body>
+</html>

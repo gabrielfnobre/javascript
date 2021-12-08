@@ -1,0 +1,23 @@
+<!--preventDefault-->
+
+<!-- O método "preventDefault", é um método que deve ser usado em eventos para impedir que um evento tenha o seu comportamento costumeiro.
+OBS: Nem todo evento é cancelável por através de preventDefault, nesses casos use "stopPropagation"...-->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de preventDefault</title>
+</head>
+<body>
+    <a href="https://nobrecoder.com.br" style="font-weight: bold;">Clique aqui!!!</a> <!--Esse link funcionaria perfeitamente se o preventDefault não estivesse ativado...-->
+    <p>Perceba que mesmo clicando no link, ele não é redirecionado...</p>
+
+    <script>
+        document.querySelector('a').onclick = click => click.preventDefault()
+        //Veja como usamos o "preventDefault()" ele deve ser aplicado sobre a chamada de um evento específico...
+    </script>
+</body>
+</html>

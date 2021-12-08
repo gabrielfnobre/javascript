@@ -1,0 +1,25 @@
+<!--ONCLICK-->
+
+<!-- O "onclick" é um evento javascript que é disparado sempre que um elemento html é clicado. Vejamos alguns exemplos...-->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de onclick</title>
+</head>
+<body>
+    <p>Abaixo temos um parágrafo, clique em cima dele para ver um comportamento adicionado por onclick acontecer</p>
+    <p id="demo" style="font-weight: bold;">Click em mim e me veja mudar...</p>
+
+    <script>
+        document.getElementById("demo").onclick = () => myFunction(); //Veja o onclick aqui sendo usado diretamente do DOM do javascript, o onclick deve receber sempre uma função callback...
+
+        function myFunction() {
+        document.getElementById("demo").innerHTML = "MUDEI POR CAUSA DO ONCLICK!";
+        }
+    </script>
+</body>
+</html>

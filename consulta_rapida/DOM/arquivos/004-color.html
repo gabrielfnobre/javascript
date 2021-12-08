@@ -1,0 +1,33 @@
+<!-- color -->
+
+<!-- A propriedade "color" é uma propriedade do objeto "style" do javascript, usamos a propriedade color para atribuir cor ao texto de um determinado elemento html, assim como fazemos com o css naturalmente. Podemos usar cores pré-definidas, hexadecimais ou rgb. Vejamos alguns exemplos...-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo style</title>
+    <style>
+        p {
+            font-weight: bold; 
+            /* Só para deixar o as letras em negrito */
+        }
+    </style>       
+</head>
+<body>
+    <p id='red'>Vermelho</p>
+    <p id="blue">Azul</p>
+    <p id="verde">Vermelho</p>
+    <p id="preto_de_opacidade_baixa">Preto de Opacidade Baixa</p>
+    
+    <!-- Abaixo temos uma função que recebe o nome da cor e atribuí ao elemento por através do seu "id"... -->
+    <script>
+        document.getElementById('red').style.color = 'red'; //Veja o uso de color com cores pré-definidas...
+        document.getElementById('blue').style.color = '#00f'; //com cor em rgb...
+        document.getElementById('verde').style.color = '#07af6d'; //com cor em hexadecimal...
+        document.getElementById('preto_de_opacidade_baixa').style.color = '#000a'; //com cor em hexadecimal...
+    </script>
+</body>
+</html>

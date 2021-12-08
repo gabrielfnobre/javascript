@@ -1,0 +1,44 @@
+<!-- querySelectorAll -->
+
+<!-- O querySelectorAll() é um método do elemento document onde podemos capturar todas tags html ou seletores css que possuírem um determinado nome, veja abaixo como podemos utilizá-la...-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>querySelectorAll</title>
+</head>
+<body>
+    <!-- Veja abaixo que todos os links estão resgardados por tags "a" e que algumas dessas tags possuem id e outras classes, vamos usar o método querySelectorAll para capturar todas as tags "a", depois todos os "ids", todas as "class" e por fim capturar as tags "a" e "class" juntas... -->
+    <a>link1</a><br>
+    <a id="sou_id">link2</a><br>
+    <a class="sou_class">link3</a><br>
+    <a id="sou_id">link4</a><br>
+    <a class="sou_class">link5</a><br>
+    <p class="sou_class">Sou um parágrafo</p>
+    <script>
+        //Note no console que todas as tags "a" são capturadas...
+        document.querySelectorAll('a').forEach(link => {
+            console.log('Estou aqui!!')
+        })
+        //Note que todos os ids "sou_id" são capturados...
+        document.querySelectorAll('#sou_id').forEach(link => {
+            console.log('Sou Id!!')
+        })
+        //Note que todas as classes "sou_class" são capturadas...
+        document.querySelectorAll('.sou_class').forEach(link => {
+            console.log('Sou Class!!')
+        })
+        //Note que todas as tags "a" e classes "sou_class" são capturadas...
+        document.querySelectorAll('.sou_class, a').forEach(link => {
+            console.log('Sou Class!!')
+        })
+        //Note que podemos usar a tag juntamente com a class para capturar somente uma class específica de uma tag...
+        document.querySelectorAll('p.sou_class').forEach(link => {
+            console.log('Sou Class do Parágrafo!!')
+        })
+    </script>
+</body>
+</html>
