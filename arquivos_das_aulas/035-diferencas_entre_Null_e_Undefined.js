@@ -4,6 +4,36 @@
 
 //NULL: É quando temos uma variável que não aponta para lugar nenhum, ele simplesmente NÃO TEM ESPAÇO DE MEMÓRIA. Geralmente é bom usarmos null quanto desejamos retirar o valor de uma variável.
 
+// O null é um tipo especial, pois pode ser traduzido como “ausência de valor” e pode ser atribuído como valor de uma variável:
+
+// let input = null;
+
+// if (input === null) {
+//  console.log('não há informação');
+// } else {
+//  console.log(input);
+// }
+// Nesse caso, qual seria a diferença entre os dois casos abaixo?
+
+// let input = null;
+// let input2;
+
+// console.log(input); // null
+// console.log(input2); // undefined
+
+// É aqui que entra o tipo undefined. Este tipo também representa “ausência de valor”, porém de uma outra forma: usualmente, enquanto null é um valor atribuído a uma variável que existe e foi iniciada, undefined se refere ao valor de uma variável que não foi inicializada (ou seja, não foi atribuído nenhum valor a ela).
+
+// undefined também é o valor retornado por uma função que não tem cláusula return. Veremos mais sobre funções e return mais adiante no curso.
+
+// É importante notar que, embora os dois tipos sejam utilizados para sinalizar ausência de valor, os operadores de comparação do JavaScript podem ou não diferenciá-los:
+
+// console.log(null == undefined); // true
+// console.log(null === undefined); // false
+
+// No cotidiano é comum considerar undefined como uma ausência de valor “inesperada” (causada por um bug ou erro no código) e null como um tipo de dado que também significa ausência de valor, mas não de maneira inesperada. Por exemplo, um campo em uma tabela de um banco de dados que esteja sem dados ou uma informação solicitada que não seja obrigatória e não tenha sido preenchida pelo usuário pode ter valor null.
+
+
+
 //JAVASCRIPT POR PADRÃO ATRIBUÍ UNDEFINED A UMA VARIÁVEL OU LET QUE NÃO TENHA VALOR ATRIBUÍDO:
 let valor;
 console.log(`1) ${valor}\n`); //Perceba que o valor será indefinido, ou seja, existe um espaço de memória, mas ele está vazio;
