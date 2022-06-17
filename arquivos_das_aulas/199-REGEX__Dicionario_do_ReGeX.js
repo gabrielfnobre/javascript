@@ -14,7 +14,7 @@
 */
 
 //TARGET USADO EM TODOS OS EXEMPLO:
-let targetDigitos = "João Almeida Augusto de Melo - Professor - Idade 36 - CPF 349.832.441-23 - RG 34.435.534-2"
+let targetDigitos = "João Almeida Augusto de Melo - Professor - Idade 36 - CPF 349.832.441-23 - RG 34.435.534-2 CNPJ 15.123.321/8883-22"
 
 
 //USANDO PONTO:
@@ -39,3 +39,11 @@ let ExDigitos2 = RegExp(/\d{3}\.\d{3}\.\d{3}-\d{2}/) //Mas uma solução mais el
 
 console.log("Exemplos de Dígitos: " + ExDigitos.exec(targetDigitos)) //Perceba que o resultado será o mesmo...
 console.log("Exemplos de Dígitos: " + ExDigitos2.exec(targetDigitos))
+
+
+//USANDO ESCAPE PARA PEGAR CARACTERES ESPECIAIS:
+let ExBarra = RegExp(/\d{2}\.\d{3}.\d{3}\/\d{4}-\d{2}/) //Quando queremos a barra, temos que usar o escape junto com a
+                                                            //barra, dessa forma "\/" para que consigamos referenciar a
+                                                            //barra...
+
+console.log("Exemplos de Barra: " + ExBarra.exec(targetDigitos)) //Aqui queremos como resultado o CNPJ da pessoa...
