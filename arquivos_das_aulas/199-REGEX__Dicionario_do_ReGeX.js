@@ -4,16 +4,31 @@
 /* 
 
     .   =   O ponto "." é um meta-char universal que pode significar qualquer caractere.
-    \   =   O escape "\" é usado para quando desejamos usar um meta-char especial ou um sinal comum sem ativar um ;
+    \   =   O escape "\" é usado para quando desejamos usar um meta-char especial ou um sinal comum sem ativar um 
             meta-char;
-    ?   =   A interrrogação "?" é um símbolo para apresentar um valor que pode ocorrer 0 ou 1 vez, ou seja, ele dá a 
-                opção, se tiver o caractere 1 vez retorne ele, mas se não tiver, não tem problema, pode retornar sem 
-                esse caractere também. Geralmente usamos ele após uma acentuação, onde a acentuação é opcional;
+    ?   =   A interrrogação "?" é um símbolo para apresentar um valor que pode ocorrer zero ou uma vez, ou seja, ele dá a 
+                opção: se tiver o caractere uma vez, retorne ele, mas se não tiver, não tem problema, pode retornar sem 
+                esse caractere também. Ele sempre é usado em conjunto com uma classe ou meta-char. A interrrogação é um 
+                dos quantifier do ReGex, ele significa zero ou uma vez;
+    *   =   O asteristico "*" é um meta-char quantifier também, ele significa zero ou muitos, usamos ele em conjunto com
+                classes e meta-chars para determinar que um caractere pode ocorrer zero ou muitas vezes;
+    +   =   O sinal de "+" é um meta-char quantifier também, ele significa uma ou muitas vezes, usamos ele em conjunto 
+                com classes e meta-chars para determinar que um caractere possa ocorrer uma ou muitas vezes;
     {}  =   As chaves "{}" são usadas para quando desejamos usar uma determinada quantidade de meta-chars, inclusive as
-            chaves são chamadas de "quantifier" no ReGex;
+            chaves são um dos "quantifier" usados no ReGex. As chaves aceitam os seguintes valores:
+                {n} significa "n" vezes determinadas que um caractere pode ocorrer;
+                {n,} significa que um caractere pode ocorrer no mínimo "n" vezes;
+                {n,m} significa que um caractere pode ocorrer no mínimo "n" vezes e no máximo "m" vezes;
     []  =   Os colchetes "[]" delimitam uma classe de caracteres, classes de caracteres são um conjunto de caracteres
-                que desejamos usar encontrar um determinado conjunto de caracteres. Podemos delimitá-los pela "," ou "-", usamos "," quando queremos um ou outro caractere, e usamos "-" quando desejamos ter valores de 1 determinado caractere até outro determinado caractere.
+                que desejamos usar encontrar um determinado conjunto de caracteres. Podemos delimitá-los pela "," ou "-", usamos "," quando queremos um ou outro caractere, e usamos "-" quando desejamos ter valores de 1 determinado caractere até outro determinado caractere. Segue abaixo alguns exemplos de classes:
+                        [a-z] significa que podemos encontrar qualquer letra minúscula que não seja acentuada;
+                        [A-Z] significa que podemos encontrar qualquer letra maiúscula que não seja acentuada;
+                        [A-z] significa que podemos encontrar qualquer letra maiúscula ou minúscula não acentuada;
+                        [0-9] significa que podemos encontrar qualquer algarismo entre 0 e 9;
+                        [n,m] significa que podemos encontrar "n" ou "m" caractere (pode ser usado qualquer valor);
+                        [0-9A-zç] veja que podemos mesclar para encontrar caracteres dos mais variados;
     \d  =   O espape d "\d" é um meta-char para encontrar dígitos;
+    \s  =   O escape s "\s" é um meta-char para encontrar espaços entre os caracteres;
 
 
 */
@@ -75,3 +90,23 @@ console.log("Exemplo com Interrogação: " + ExSemInterrogacao.exec(targetDigito
                                                                                         //força o encontro do primeiro conjunto e letras minúsculas sem acentuação, indo até o "lm" do Almeida..
 console.log("Exemplo com Interrogação: " + ExInterrogacao.exec(targetDigitos)) //Mas quando tornamos o encontro da 2 
                                                                                 //letra opcional, ele pega para nós o 1º caractere "o" do nome João...
+
+
+//USANDO QUANTIFERS PARA ENCONTRAR UMA DATA PADRÃO:
+let data = "01/02/21" //Note que para encontrar datas temos que seguir um determinado padrão, onde os 2 primeiros 
+                        //dígitos só poderão ir do 01 ao 31, os 2 segundos dígitos só poderão ir do 01 ao 12 e o ano
+                        //poderá ter 2 ou 4 dígitos...
+let data2 = "31/12/2021"
+let ExData = new RegExp(/[0-3]?\d\/[0-1]?\d\/\d{2,4}/)
+console.log("Exemplo com Quantifiers: " + ExData.exec(data)) //Note que o ReGex funciona para ambas as datas...
+console.log("Exemplo com Quantifiers: " + ExData.exec(data2))
+
+
+//USANDO ESPAÇOS COM \s:
+let ExEspacos = new RegExp(/[A-zã]+\s[A-z]+\s[A-z]+/) //Veja que usamos as classes alfabéticas para encontrar qualquer
+                                                        //sequência de letras maiúsculas ou minúsculas contendo 1 ou mais
+                                                        //ocorrências, seguido pelo \s, ou seja, a cada espaço ela passa
+                                                        //para a próxima sequência. Note também que na primeira classe
+                                                        //alfabética usamos em conjunto o "ã" para pegar o acentuação
+                                                        //que existe no nome "João"
+console.log("Exemplo com Espaço \\s: " + ExEspacos.exec(targetDigitos))
