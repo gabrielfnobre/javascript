@@ -14,6 +14,8 @@
                 classes e meta-chars para determinar que um caractere pode ocorrer zero ou muitas vezes;
     +   =   O sinal de "+" é um meta-char quantifier também, ele significa uma ou muitas vezes, usamos ele em conjunto 
                 com classes e meta-chars para determinar que um caractere possa ocorrer uma ou muitas vezes;
+    ^   =   O circunflexo "^" é um meta-char para determinar uma negação, geralmente o usamos precedido a um carectere
+                ou caracteres que desejamos que não sejam encontrados;
     {}  =   As chaves "{}" são usadas para quando desejamos usar uma determinada quantidade de meta-chars, inclusive as
             chaves são um dos "quantifier" usados no ReGex. As chaves aceitam os seguintes valores:
                 {n} significa "n" vezes determinadas que um caractere pode ocorrer;
@@ -27,8 +29,11 @@
                         [0-9] significa que podemos encontrar qualquer algarismo entre 0 e 9;
                         [n,m] significa que podemos encontrar "n" ou "m" caractere (pode ser usado qualquer valor);
                         [0-9A-zç] veja que podemos mesclar para encontrar caracteres dos mais variados;
+                Atenção, lembre-se que dentro de uma classe somente os caracteres "\" e "^" são meta-chars;
     \d  =   O espape d "\d" é um meta-char para encontrar dígitos;
     \s  =   O escape s "\s" é um meta-char para encontrar espaços entre os caracteres;
+    \w  =   O escape w "\w" é um meta-char para encontrar qualquer caractere alfanumérico e o underline (ATENÇÃO: ele
+                não encontra caracteres acentuados ou especiais);
 
 
 */
@@ -110,3 +115,17 @@ let ExEspacos = new RegExp(/[A-zã]+\s[A-z]+\s[A-z]+/) //Veja que usamos as clas
                                                         //alfabética usamos em conjunto o "ã" para pegar o acentuação
                                                         //que existe no nome "João"
 console.log("Exemplo com Espaço \\s: " + ExEspacos.exec(targetDigitos))
+
+
+//USANDO O CIRCUNFLEXO PARA IGNORAR CARACTERES:
+let ExCircunflexo = new RegExp(/[^0-9]*/) //Note que estamos usando a negação para não pegar nenhum algarismo, somente as
+                                                //letras, mas note que quando ele encontra o primeiro algarismo o regex
+                                                //encerra a comparação. A negação é muito boa para utilizar quando 
+console.log("Exemplo de negação com circunflexo: " + ExCircunflexo.exec(targetDigitos))
+
+
+//USANDO O \w PARA ENCONTRAR QUALQUER CARACTERE ALFANUMÉRICO:
+let ExLetras = new RegExp(/[\wã\s-\.]+/) //Note que estamos usando o "\w" para pegar todos os caracteres alfanuméricos
+                                                //e tivemos que acrescentar alguns caracteres qua não seriam encontrados
+                                                //pelo "\w"....
+console.log("Exemplo de Letras com \\w: " + ExLetras.exec(targetDigitos))
