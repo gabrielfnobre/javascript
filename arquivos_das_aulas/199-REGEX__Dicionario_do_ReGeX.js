@@ -16,6 +16,9 @@
                 com classes e meta-chars para determinar que um caractere possa ocorrer uma ou muitas vezes;
     ^   =   O circunflexo "^" é um meta-char para determinar uma negação, geralmente o usamos precedido a um carectere
                 ou caracteres que desejamos que não sejam encontrados;
+    $   =   O Sifrão "$" é um meta-char âncora para demilitar um fim da linha, usamos para encontrar palavras que 
+                precedem um fim da linha, dessa forma "abc$", toda palavra "abc" que estiver no fim de uma linha será
+                encontrada;
     {}  =   As chaves "{}" são usadas para quando desejamos usar uma determinada quantidade de meta-chars, inclusive as
             chaves são um dos "quantifier" usados no ReGex. As chaves aceitam os seguintes valores:
                 {n} significa "n" vezes determinadas que um caractere pode ocorrer;
@@ -30,6 +33,9 @@
                         [n,m] significa que podemos encontrar "n" ou "m" caractere (pode ser usado qualquer valor);
                         [0-9A-zç] veja que podemos mesclar para encontrar caracteres dos mais variados;
                 Atenção, lembre-se que dentro de uma classe somente os caracteres "\" e "^" são meta-chars;
+    \b  =   O escape b "\b" é uma âncora também, significa boundary (fronteira), para encontrar uma expressão que não
+                pode ser antecedida, precedida ou ambos por nenhum char que não esteja entre o "\b", geralmente a usamos
+                assim: "\bexpressao\b" ela vi procurar somente as ocorrêcias onde a palavra ocorre;
     \d  =   O espape d "\d" é um meta-char para encontrar dígitos;
     \s  =   O escape s "\s" é um meta-char para encontrar espaços entre os caracteres;
     \w  =   O escape w "\w" é um meta-char para encontrar qualquer caractere alfanumérico e o underline (ATENÇÃO: ele
@@ -129,3 +135,17 @@ let ExLetras = new RegExp(/[\wã\s-\.]+/) //Note que estamos usando o "\w" para 
                                                 //e tivemos que acrescentar alguns caracteres qua não seriam encontrados
                                                 //pelo "\w"....
 console.log("Exemplo de Letras com \\w: " + ExLetras.exec(targetDigitos))
+
+
+//USANDO $ PARA ENCONTRAR PALAVRAS QUE MARCAM O FIM DE UMA LINHA:
+let ExSifrao = new RegExp(/\w$/) //Perceba que usamos o "$" logo após qualquer caractere alfanumérico que esteja no final
+                                        //da linha, que no caso é o caracter "2" do CNPJ
+console.log("Exemplo de Sifrão: " + ExSifrao.exec(targetDigitos))
+
+
+//USANDO \b COMO ANCORA PARA ENCONTRAR SOMENTE UMA DETERMINADA EXPRESSÃO:
+let ExAncoraB = new RegExp(/\bde\b/) //Nesse caso queremos encontrar uma expressão "de" que esteja isolada no texto, ela
+                                        //não pode estar sendo precedida por nenhum caractere e nem ser precedida por 
+                                        //nenhum outro caractere, só poderá ter espaços entre ela, como resultados temos
+                                        //o "de" do "Augusto de Melo"...
+console.log("Exemplo de Âncora B: " + ExAncoraB.exec(targetDigitos))
