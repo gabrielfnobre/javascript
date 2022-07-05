@@ -36,6 +36,9 @@
     \b  =   O escape b "\b" é uma âncora também, significa boundary (fronteira), para encontrar uma expressão que não
                 pode ser antecedida, precedida ou ambos por nenhum char que não esteja entre o "\b", geralmente a usamos
                 assim: "\bexpressao\b" ela vi procurar somente as ocorrêcias onde a palavra ocorre;
+    \B  =   O escape B "\B" (maiúsculo) é uma âncora que faz o contrário do "\b", por isso a chamamos e 
+                Non-Word-Boundary, ou seja, uma expressão regex que só poderá estar no meio de uma palavra, ela nunca
+                poderá ser uma palavra fronteiriça.
     \d  =   O espape d "\d" é um meta-char para encontrar dígitos;
     \s  =   O escape s "\s" é um meta-char para encontrar espaços entre os caracteres;
     \w  =   O escape w "\w" é um meta-char para encontrar qualquer caractere alfanumérico e o underline (ATENÇÃO: ele
@@ -148,4 +151,10 @@ let ExAncoraB = new RegExp(/\bde\b/) //Nesse caso queremos encontrar uma express
                                         //não pode estar sendo precedida por nenhum caractere e nem ser precedida por 
                                         //nenhum outro caractere, só poderá ter espaços entre ela, como resultados temos
                                         //o "de" do "Augusto de Melo"...
-console.log("Exemplo de Âncora B: " + ExAncoraB.exec(targetDigitos))
+console.log("Exemplo de Âncora \\b: " + ExAncoraB.exec(targetDigitos))
+
+//USANDO \B COMO ANCORA PARA ENCONTRAR SOMENTE UMA EXPRESSÃO QUE ESTIVER NO MEIO DE UMA PALAVRA:
+let ExAncoraBMaiusculo = new RegExp(/.+\Bde\b/) //Nesse caso queremos encontrar uma expressão "de" que esteja no meio de
+                                                        //uma expressão, mas que não pode ser precedida por nenhuma outra
+                                                        //letra...
+console.log("Exemplo de Âncora \\B: " + ExAncoraBMaiusculo.exec(targetDigitos))
