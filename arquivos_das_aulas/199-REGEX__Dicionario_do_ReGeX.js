@@ -10,6 +10,9 @@
                 opção: se tiver o caractere uma vez, retorne ele, mas se não tiver, não tem problema, pode retornar sem 
                 esse caractere também. Ele sempre é usado em conjunto com uma classe ou meta-char. A interrrogação é um 
                 dos quantifier do ReGex, ele significa zero ou uma vez;
+    ?:  =   A interrogação com 2 pontos "?:" é um meta-char para ignorar uma expressão ou caractere, muito utilizada em 
+                grupos de caractere, quando desejamos ignorar todo um grupo de caractere dentro de uma expressão, da
+                seguinte forma: "expressão(?:grupo a ser ignorado)expressão";
     *   =   O asteristico "*" é um meta-char quantifier também, ele significa zero ou muitos, usamos ele em conjunto com
                 classes e meta-chars para determinar que um caractere pode ocorrer zero ou muitas vezes;
     +   =   O sinal de "+" é um meta-char quantifier também, ele significa uma ou muitas vezes, usamos ele em conjunto 
@@ -19,6 +22,12 @@
     $   =   O Sifrão "$" é um meta-char âncora para demilitar um fim da linha, usamos para encontrar palavras que 
                 precedem um fim da linha, dessa forma "abc$", toda palavra "abc" que estiver no fim de uma linha será
                 encontrada;
+    ()  =   Os parênteses "()" são meta-chars para a definição de grupos de caractere, os grupos de caractere são 
+                conjuntos de caractere, muitas vezes dentro de uma expressão onde separamos uma determada expressão para
+                dar algum tipo de tratamento especial a ela. Por exemplo, digamos que dentro da expressão que busca uma
+                data "15 de julho de 2015" desejamos procurar só a expressão onde ocorre a palavra "de", isso é possível
+                usando os grupos de caractere, da seguinte forma: \d{1,2}\s(?:de\s)\w+\s(?:de\s)\d{2,4}, perceba que só 
+                onde poderia haver uma expressão "de" vamos capturar essas expressões e damos a ela a opção de ignorar essas expressões usando o meta-char de ignorar "?:"
     {}  =   As chaves "{}" são usadas para quando desejamos usar uma determinada quantidade de meta-chars, inclusive as
             chaves são um dos "quantifier" usados no ReGex. As chaves aceitam os seguintes valores:
                 {n} significa "n" vezes determinadas que um caractere pode ocorrer;
@@ -158,3 +167,17 @@ let ExAncoraBMaiusculo = new RegExp(/.+\Bde\b/) //Nesse caso queremos encontrar 
                                                         //uma expressão, mas que não pode ser precedida por nenhuma outra
                                                         //letra...
 console.log("Exemplo de Âncora \\B: " + ExAncoraBMaiusculo.exec(targetDigitos))
+
+
+//USANDO GRUPOS DE EXPRESSÃO E META-CHAR DE IGNORAR EXPRESSÃO:
+//Perceba abaixo que temos 2 formatos de data, podemos pegar os 2 com uma única expressão, somente ignorando grupos...
+let dataIgnorarGrupo = "15 Julho 2015"
+let dataIgnorarGrupo2 = "15 de Julho de 2015"
+let ExDataIgnorarGrupo = new RegExp(/\d{1,2}\s(?:de\s)?\w+\s(de\s)?\d{2,4}/) //Perceba que ambas as expressões grupais
+                                                                                //"de" são opcionais de darem match, mas
+                                                                                //na 1ª expressão queremos ignorar o 
+                                                                                //o retorno do grupo, ou seja, o Regex
+                                                                                //não irá encontrá-lo...
+console.log("Exemplo de Ignorar Grupos: " + ExDataIgnorarGrupo.exec(dataIgnorarGrupo)) // 15 Julho 2015, "retorno nenhum"
+console.log("Exemplo de Ignorar Grupos: " + ExDataIgnorarGrupo.exec(dataIgnorarGrupo2))//15 de Julho de 2015, "apenas o
+                                                                                        //retorno do 1º "de"" 
