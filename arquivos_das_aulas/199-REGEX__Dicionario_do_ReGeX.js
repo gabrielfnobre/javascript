@@ -6,6 +6,8 @@
     .   =   O ponto "." é um meta-char universal que pode significar qualquer caractere.
     \   =   O escape "\" é usado para quando desejamos usar um meta-char especial ou um sinal comum sem ativar um 
             meta-char;
+    |   =   O pipe "|" é um meta-char quando queremos usar o operador booleano "OU", podemos utilizá-lo para retornar
+                um resultado invez de outro;
     ?   =   A interrrogação "?" é um símbolo para apresentar um valor que pode ocorrer zero ou uma vez, ou seja, ele dá a 
                 opção: se tiver o caractere uma vez, retorne ele, mas se não tiver, não tem problema, pode retornar sem 
                 esse caractere também. Ele sempre é usado em conjunto com uma classe ou meta-char. A interrrogação é um 
@@ -181,3 +183,10 @@ let ExDataIgnorarGrupo = new RegExp(/\d{1,2}\s(?:de\s)?\w+\s(de\s)?\d{2,4}/) //P
 console.log("Exemplo de Ignorar Grupos: " + ExDataIgnorarGrupo.exec(dataIgnorarGrupo)) // 15 Julho 2015, "retorno nenhum"
 console.log("Exemplo de Ignorar Grupos: " + ExDataIgnorarGrupo.exec(dataIgnorarGrupo2))//15 de Julho de 2015, "apenas o
                                                                                         //retorno do 1º "de"" 
+
+//USANDO O PIPE PARA USAR O OPERADOR OU:
+let email1 = "gabriel@gmail.com"
+let email2 = "gabriel@jwpub.org"
+let ExPipe = new RegExp(/.+[@gmail.com | @jwpub.org]/) //Perceba que independente do final do email, ele pega os 2 emails
+console.log("Exemplo de uso o operador OU pelo Pipe: " + ExPipe.exec(email1)) //por que estamos dando essa opção para ele
+console.log("Exemplo de uso o operador OU pelo Pipe: " + ExPipe.exec(email2)) //por através do operador OU
