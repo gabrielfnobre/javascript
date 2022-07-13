@@ -12,6 +12,10 @@
                 opção: se tiver o caractere uma vez, retorne ele, mas se não tiver, não tem problema, pode retornar sem 
                 esse caractere também. Ele sempre é usado em conjunto com uma classe ou meta-char. A interrrogação é um 
                 dos quantifier do ReGex, ele significa zero ou uma vez;
+                OBS: A interrogação também pode ser usada para tornar um quantifier ou grupo de caracteres preguiçoso.
+                Como assim? Por exemplo, quando o "?" é usado em conjunto com o "+" ele passa a significar que você pode
+                encontrar 1 ou mais caracteres daquele tipo mas só até encontrar a primeira ocorrência desse caractere,
+                por dizemos que o quantifier fica preguiçoso;
     ?:  =   A interrogação com 2 pontos "?:" é um meta-char para ignorar uma expressão ou caractere, muito utilizada em 
                 grupos de caractere, quando desejamos ignorar todo um grupo de caractere dentro de uma expressão, da
                 seguinte forma: "expressão(?:grupo a ser ignorado)expressão";
@@ -190,3 +194,13 @@ let email2 = "gabriel@jwpub.org"
 let ExPipe = new RegExp(/.+[@gmail.com | @jwpub.org]/) //Perceba que independente do final do email, ele pega os 2 emails
 console.log("Exemplo de uso o operador OU pelo Pipe: " + ExPipe.exec(email1)) //por que estamos dando essa opção para ele
 console.log("Exemplo de uso o operador OU pelo Pipe: " + ExPipe.exec(email2)) //por através do operador OU
+
+
+//USANDO O PREGUIÇOSO E O GANÂNCIOSO:
+let reduzindoBusca = "Olá como está?" //Perceba que aqui temos 2 ocorrências do "á" vamos usar o ganâncioso pra pegar
+                                        //tudo até a última ocorrência do "á" e preguiçoso para pegar tudo até a primeira
+                                        //ocorrência do "á"...
+let ExGanancioso = new RegExp(/.+á/) //Aqui temos a ganancioso...
+let ExPreguicoso = new RegExp(/.+?á/) //E o preguiçoso onde usamos o "?"
+console.log("Exemplo de uso do Preguiçoso: " + ExGanancioso.exec(reduzindoBusca)) //=> Olá como está
+console.log("Exemplo de uso do Preguiçoso: " + ExPreguicoso.exec(reduzindoBusca)) //=> Olá
