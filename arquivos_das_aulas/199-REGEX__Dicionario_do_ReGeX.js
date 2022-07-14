@@ -33,14 +33,22 @@
                 dar algum tipo de tratamento especial a ela. Por exemplo, digamos que dentro da expressão que busca uma
                 data "15 de julho de 2015" desejamos procurar só a expressão onde ocorre a palavra "de", isso é possível
                 usando os grupos de caractere, da seguinte forma: \d{1,2}\s(?:de\s)\w+\s(?:de\s)\d{2,4}, perceba que só 
-                onde poderia haver uma expressão "de" vamos capturar essas expressões e damos a ela a opção de ignorar essas expressões usando o meta-char de ignorar "?:"
+                onde poderia haver uma expressão "de" vamos capturar essas expressões e damos a ela a opção de ignorar essas 
+                expressões usando o meta-char de ignorar "?:"
+                OBS: Existe um conceito na criação de grupos também que se chama "backreference", uma backreference é quando 
+                conseguimos referenciar um mesmo grupo dentro de uma determinada expressão. Para isso usamos o escape seguido
+                pelo número que corresponde a posição do grupo que queremos referenciar, assim: "\2" (Estamos dizendo nesse
+                exemplo que queremos referenciar ao 2º grupo de uma expressão ReGex)
+
     {}  =   As chaves "{}" são usadas para quando desejamos usar uma determinada quantidade de meta-chars, inclusive as
             chaves são um dos "quantifier" usados no ReGex. As chaves aceitam os seguintes valores:
                 {n} significa "n" vezes determinadas que um caractere pode ocorrer;
                 {n,} significa que um caractere pode ocorrer no mínimo "n" vezes;
                 {n,m} significa que um caractere pode ocorrer no mínimo "n" vezes e no máximo "m" vezes;
     []  =   Os colchetes "[]" delimitam uma classe de caracteres, classes de caracteres são um conjunto de caracteres
-                que desejamos usar encontrar um determinado conjunto de caracteres. Podemos delimitá-los pela "," ou "-", usamos "," quando queremos um ou outro caractere, e usamos "-" quando desejamos ter valores de 1 determinado caractere até outro determinado caractere. Segue abaixo alguns exemplos de classes:
+                que desejamos usar encontrar um determinado conjunto de caracteres. Podemos delimitá-los pela "," ou "-", usamos 
+                "," quando queremos um ou outro caractere, e usamos "-" quando desejamos ter valores de 1 determinado caractere 
+                até outro determinado caractere. Segue abaixo alguns exemplos de classes:
                         [a-z] significa que podemos encontrar qualquer letra minúscula que não seja acentuada;
                         [A-Z] significa que podemos encontrar qualquer letra maiúscula que não seja acentuada;
                         [A-z] significa que podemos encontrar qualquer letra maiúscula ou minúscula não acentuada;
@@ -204,3 +212,13 @@ let ExGanancioso = new RegExp(/.+á/) //Aqui temos a ganancioso...
 let ExPreguicoso = new RegExp(/.+?á/) //E o preguiçoso onde usamos o "?"
 console.log("Exemplo de uso do Preguiçoso: " + ExGanancioso.exec(reduzindoBusca)) //=> Olá como está
 console.log("Exemplo de uso do Preguiçoso: " + ExPreguicoso.exec(reduzindoBusca)) //=> Olá
+
+
+//REFERENCIANDO UM GRUPO POR UMA BACKREFERENCE:
+let pegandoTag1 = '<h1></h2>' //Veja que o fechamento da tag está errado, com h2 no lugar de h1...
+let pegandoTag2 = '<h1></h1>' //Essa tag já está correta...
+let ExBackrefence = new RegExp(/<(h[1-6])><\/\1>/) //Nossa expressão está usando uma backreference para pegar o grupo 1, onde ela
+                                                        //vai repetir o resultado que der no grupo 1, evitando que o fechamento de
+                                                        //tag errado seja pego...
+console.log("Exemplo de uso da Backreference: " + ExBackrefence.exec(pegandoTag1)) //=> null
+console.log("Exemplo de uso da Backreference: " + ExBackrefence.exec(pegandoTag2)) //=> <h1></h1>, h1
