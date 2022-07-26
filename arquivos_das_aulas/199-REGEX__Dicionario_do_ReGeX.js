@@ -19,6 +19,10 @@
     ?:  =   A interrogação com 2 pontos "?:" é um meta-char para ignorar uma expressão ou caractere, muito utilizada em 
                 grupos de caractere, quando desejamos ignorar todo um grupo de caractere dentro de uma expressão, da
                 seguinte forma: "expressão(?:grupo a ser ignorado)expressão";
+    ?=  =   A interrogação com atribuição "?+" é usada em grupos de caracteres, para definir que somente determinados 
+                caracteres que estiverem dentro do grupo são aceitáveis;
+    ?!  =   A interrogação com negação "?!" é usada em grupos de caracteres, para definir que somente determinados 
+                caracteres não são aceitáveis dentro de uma expressão;
     *   =   O asteristico "*" é um meta-char quantifier também, ele significa zero ou muitos, usamos ele em conjunto com
                 classes e meta-chars para determinar que um caractere pode ocorrer zero ou muitas vezes;
     +   =   O sinal de "+" é um meta-char quantifier também, ele significa uma ou muitas vezes, usamos ele em conjunto 
