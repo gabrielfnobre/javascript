@@ -1,0 +1,80 @@
+<!-- DATA-ATTRIBUTES -->
+
+<!-- Data-attributes são utilizados para guardar valores em elementos HTML. Esses valores podem ser manipulados através do 
+    JavaScript. Também é possível estilizar elementos HTML com CSS referenciando o seu data-attribute. Essa funcionalidade é 
+    bem recente no mundo do desenvolvimento, sendo lançada na última versão do HTML(HTML5).
+
+    Data-attributes não devem ser utilizados para dados visíveis, pois tecnologias de acessibilidade podem não identificar seus valores.
+    
+    Sua estrutura é dividida em duas partes:
+    
+    A primeira parte é o identificador deste dado, que consiste em data- + o nome de sua escolha que melhor identifica o tipo 
+    de dado a ser atribuído.
+    
+    A segunda parte é o valor atribuído à este data-attribute, este valor deve sempre estar entre aspas “”, e dessa maneira é 
+    lido como uma string.
+
+    OBS: O prefixo data- não é obrigatório podemos usar o nome do atributo direto se quisermos, mas por questão de boas práticas
+    costumamos o usar o prefixo data-
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #wrapper {
+            align-items: center;
+            border: none;
+            display: flex;
+            height: 20vh;
+            justify-content: space-around;
+            width: 100%;
+        }
+        div {
+            border: 1px solid black;
+            height: 10vh;
+            width: 10vh;
+        }
+        label {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    <title>DATA-ATTRIBUTES</title>
+</head>
+<body>
+    <section id="wrapper">
+        <div data-padrao="aceita" class="quadrado"></div> <!-- Veja que temos data-attributes com nomes iguais mas -->
+        <div data-padrao="não aceita" class="quadrado"></div> <!-- com valores diferentes-->
+        <div data-padrao="não aceita" class="quadrado"></div>
+        <div data-padrao="aceita" class="quadrado"></div>
+    </section>
+    <label for="texto">
+        <p><b>Escreva uma cor em inglês depois clique num quadrado</b>(Se não escolher nenhuma cor o padrão será preto)</p>
+        Note que só os quadrados que tiverem o data-attribute correto vão aceitar a troca de cor...
+        <input type="text" onblur="pegaCor(this)" id="texto">
+    </label>
+</body>
+<script>
+    let divs = document.querySelectorAll('.quadrado')
+    let cor = 'black'
+    divs.forEach(element => element.addEventListener('click', event => mudaCor(event)))
+    
+    function mudaCor(element){
+        let elemento = element.target
+        if(elemento.dataset.padrao == 'aceita'){ //Usamos dataset para capturar o valor de um determinado data-attribute
+            elemento.style.background = cor      //somente quando o valor é satisfeito é que nós fazemos ele pegar a cor
+        } else {
+            elemento.innerText = 'Não aceita cor'
+        }
+    }
+
+    function pegaCor(ohThis){
+        return cor = ohThis.value
+    }
+</script>
+</html>
